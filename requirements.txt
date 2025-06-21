@@ -1,8 +1,12 @@
 dash
-plotly
-pandas
-networkx
-pyvis
 dash-cytoscape
+dash-table
+pandas
+numpy
+plotly
+matplotlib
+pyvis
 wordcloud
-
+networkx
+python-louvain
+nltk
