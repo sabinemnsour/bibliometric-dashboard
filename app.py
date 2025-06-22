@@ -28,6 +28,8 @@ import community as community_louvain
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+nltk.download('punkt')
+nltk.download('stopwords')
 
 # Utilitaires
 import base64
