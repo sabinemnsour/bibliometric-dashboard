@@ -37,6 +37,9 @@ from io import BytesIO
 import tempfile
 import os
 
+from nltk.tokenize import TreebankWordTokenizer
+
+
 
 
 
@@ -1089,7 +1092,6 @@ amu_labels = amu_top_counts.index.to_series()
 nltk.download('punkt')
 nltk.download('stopwords')
 
-from nltk.tokenize import TreebankWordTokenizer
 tokenizer = TreebankWordTokenizer()
 
 
@@ -1136,7 +1138,7 @@ for _, row in df_grouped.iterrows():
     else:
         continue
 
-    tokens = word_tokenize(re.sub(r'[^a-zA-Z\s]', '', title))
+    tokens = tokenizer.tokenize(re.sub(r'[^a-zA-Z\s]', '', title))  # ✅ la bonne version
     filtered = [w for w in tokens if w not in custom_stopwords and len(w) > 2]
 
     for group in groups:
@@ -1209,7 +1211,7 @@ for _, row in df_year_title.iterrows():
     title = str(row['Title']).lower()
     year = int(row['Publication Date'])
 
-    tokens = word_tokenize(re.sub(r'[^a-zA-Z\s]', '', title))
+    tokens = tokenizer.tokenize(re.sub(r'[^a-zA-Z\s]', '', title))  # ✅ la bonne version
     filtered = [w for w in tokens if w not in custom_stopwords and len(w) > 2]
     year_keywords[year].update(filtered)
 
