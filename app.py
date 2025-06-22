@@ -1085,8 +1085,14 @@ amu_labels = amu_top_counts.index.to_series()
 
 # Keyword Extraction from Titles
 
+
 nltk.download('punkt')
 nltk.download('stopwords')
+
+from nltk.tokenize import TreebankWordTokenizer
+tokenizer = TreebankWordTokenizer()
+
+
 titles = df['Title'].dropna().astype(str).str.lower()
 
 custom_stopwords = set(stopwords.words('english')) | {
@@ -1096,7 +1102,7 @@ custom_stopwords = set(stopwords.words('english')) | {
 word_counts = Counter()
 
 for title in titles:
-    tokens = word_tokenize(re.sub(r'[^a-zA-Z\s]', '', title))
+    tokens = tokenizer.tokenize(re.sub(r'[^a-zA-Z\s]', '', title))
     filtered = [w for w in tokens if w not in custom_stopwords and len(w) > 2]
     word_counts.update(filtered)
 
